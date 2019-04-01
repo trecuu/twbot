@@ -19,7 +19,6 @@ class twbot:
 		else:
 			self.Send_message(".timeout " + username + " " + str(time))
 			self.Send_message("User : "+username+" foi banido do canal por "+str(time)+" segundos.")	
-		
 	
 	def Alo(self, username):
 			self.Send_message(username + ", VAI TUMA NO CU")
@@ -30,14 +29,12 @@ class twbot:
 		readbuffer = readbuffer + s.recv(1024).decode()
 		temp = readbuffer.split("\n")
 		readbuffer = temp.pop()
-
 		for line in temp:
 			if (line.split()[0] == "PING"):
 				print (line)
 				s.send(("PONG "+ line.split()[1] + "\r\n").encode())
 			else:
 				parts = line.split(":")
-
 				if "QUIT" not in parts[1] and "JOIN" not in parts[1] and "PART" not in parts[1]:
 					try:
 						message = parts[2][:len(parts[2]) - 1]
@@ -45,23 +42,16 @@ class twbot:
 						message = ""
 					usernamesplit = parts[1].split("!")
 					username = usernamesplit[0]
-					
 					if MODT:
 						print (username + ": " + message)
-						# You can add all your plain commands here
 						if message.lower() == "alo":
-							Send_message(username + ", VAI TUMA NO CU")
-						if message.lower() == "!test":
-							Send_message(username + ", se fode")
-						if message.lower() == "!ban":
-							self.Banplayer(username)
+							self.Alo(username)
 						if username == "macotv":
-							if "ban123player" in message:
+							if message.split()[0] == "!ban123":
 								if len(message.split()) == 3:
 									self.Banplayer(message.split()[-2],message.split()[-1])
 								if len(message.split()) == 2:
 									self.Banplayer(message.split()[-2])
-
 					for l in parts:
 						if "End of /NAMES list" in l:
 							MODT = True

@@ -76,8 +76,10 @@ class twbot:
 		s.send(("JOIN " + self.channel + "\r\n").encode())
 		self.socket = s
 
-
+#testing
 bot = twbot("trecuu","oauth:SEGREDINHO","#macotv")
 bot.name = "alo"
 print(bot.host)
 
+
+#testing
